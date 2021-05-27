@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,3 +43,29 @@
         gtag('config', 'UA-152477001-1');
     </script>
 </head>
+
+<body>
+    <!-- h1 for SEO purposes -->
+    <h1 style="display: none;">Music's Pool - Dive in and discover or become the next big thing</h1>
+    <div id="app" :class="{'pool-dark' : isDark}">
+        <sidebar v-if="isApp"></sidebar>
+        <router-view v-if="!isApp"></router-view>
+        <div v-else id="page-content-wrapper">
+            <div style="min-height: 100vh; width: 100%; display: flex; flex-direction: column;">
+                <div class="mainContent pb-5">
+                    <router-view></router-view>
+                </div>
+                <player></player>
+                <mobileplayer></mobileplayer>
+                <audio ref="mainPlayer" id="audio-player" class="audio-player hide" @ended="nextSong"
+                    @timeupdate="initProgressBar">
+                    <source v-if="currentSong" :src="'/api/songs/stream/' + currentSong.id"
+                        type="audio/mpeg" id="audio-src">
+                </audio>
+            </div>
+        </div>
+    </div>
+        <script src="https://www.musicspool.com/js/vue.js?id=4b3a0851ee263f5e18f0"></script>
+</body>
+
+</html>
